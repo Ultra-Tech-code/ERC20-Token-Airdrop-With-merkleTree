@@ -41,12 +41,19 @@ async function main() {
       "0x049c621a1d72513a8dbbba58108a62863b18bbef573e740977f2c7091eb0e22f"
   ]
   
+  const tokenINteract = await ethers.getContractAt("TimidanToken", timidanToken.address);
+  const amt = ethers.utils.parseUnits("2000")
+  const transferToken = await tokenINteract.transferOut(airdrop.address, amt )
+  console.log("balance of address",transferToken )
 
-  const tokenINteract = await ethers.getContractAt("Airdrop", airdrop.address);
-  const amt = ethers.utils.parseUnits("32")
-  const claim = await tokenINteract.connect(signer).Claim(proof, amt);
+
+  const airdropINteract = await ethers.getContractAt("Airdrop", airdrop.address);
+  const claim = await airdropINteract.connect(signer).Claim(proof, 32);
   const claimTxn = await claim.wait();
   console.log("claimed :", claimTxn);
+
+  const balance =  await tokenINteract.balanceOf(signer.address);
+  console.log("balance of signer:", balance );
 
 }
 
