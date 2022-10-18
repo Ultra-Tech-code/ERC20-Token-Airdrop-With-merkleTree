@@ -3,13 +3,14 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-//import "gen_files/merkleProof.json";
 
 contract Airdrop {
-    bytes32 public merkleRoot = 0x953ccfc66eded938902be7f24ea1485af6541b376648c7794fc2c1a0268b1dd4;
+    //0x953ccfc66eded938902be7f24ea1485af6541b376648c7794fc2c1a0268b1dd4;
+    bytes32 public merkleRoot;
     address public contractADDr;
-    constructor (address addr){
+    constructor (address addr, bytes32 merkleroot){
         contractADDr = addr;
+        merkleRoot = merkleroot;
     }
   
     mapping(address => bool) public whitelistClaimed;

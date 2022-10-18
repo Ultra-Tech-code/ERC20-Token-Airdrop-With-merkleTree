@@ -17,10 +17,11 @@ async function main() {
 //  const addr10 = "0xc8211f26bb21afc25bb784208a63d96deaae55cb"
 
 
-const claimer =  Object.keys(userDetails)[2]
+const claimer =  Object.keys(userDetails)[1]
 
 const amount = userDetails[claimer].amount
 const proof = merkle[claimer].proof;
+const merkleroot = userDetails["dropDetails"].merkleroot;
 
 //console.log(claimer, amount, proof);
 
@@ -40,14 +41,14 @@ const proof = merkle[claimer].proof;
   console.log(`Lock deployed to ${timidanToken.address}`);
 
   const Airdrop = await ethers.getContractFactory("Airdrop");
-  const airdrop = await Airdrop.deploy(timidanToken.address);
+  const airdrop = await Airdrop.deploy(timidanToken.address, merkleroot);
   await airdrop.deployed();
   console.log(`Airdrop deployed to ${airdrop.address}`);
   
   const tokenINteract = await ethers.getContractAt("TimidanToken", timidanToken.address);
   const amt = ethers.utils.parseUnits("2000")
   const transferToken = await tokenINteract.transferOut(airdrop.address, amt )
-  console.log("balance of address",transferToken )
+  console.log("result of address",transferToken )
 
 
   const airdropINteract = await ethers.getContractAt("Airdrop", airdrop.address);

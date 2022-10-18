@@ -7,7 +7,7 @@ const Web3 = require("web3");
 
 function main() {
   // create web3 instance (no provider needed)
-  var web3 = new Web3();
+  //var web3 = new Web3();
   let root;
 
   ///files for each ardrop
